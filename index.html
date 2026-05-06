@@ -1,98 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uganda Digital Surveillance Watch | Research Intelligence Dashboard</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Map Library -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
+    <title>Uganda Spyware & Surveillance Watch | Empirical Artefact</title>
+
+    <!-- Fonts: Clean academic typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Map Library: Globe.gl & Three.js -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+
     <!-- Chart.js for Survey Data -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <div class="scanline"></div>
-    
-    <header>
-        <div class="header-container">
-            <div class="badge">RESEARCH ARTEFACT</div>
-            <h1>Uganda Digital Surveillance Watch</h1>
-            <p class="subtitle">An intelligence dashboard tracking spyware, surveillance technologies, and privacy impacts in East Africa. Developed for Chapter 4 of: "A Framework for Mitigating Spyware-Enabled Surveillance Risks in Uganda" by Denis Ainedembe.</p>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="title-block">
+                    <span class="academic-badge">EMPIRICAL RESEARCH ARTEFACT</span>
+                    <h1>Uganda Spyware & Surveillance Watch</h1>
+                    <i>"They know who you are. It's time to uncover who they are." — SurveillanceWatch</i>
+                </div>
+                <div class="meta-block">
+                    <p><strong>Researcher:</strong>Ainedembe Denis</p>
+                    <p><strong>Institution:</strong> Uganda Martyrs University</p>
+                    <button class="methodology-btn"
+                        onclick="document.getElementById('methodologyModal').classList.add('active')">View
+                        Methodology</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="dashboard">
-        <!-- Panel 1: World Vendor Map -->
-        <section class="panel map-panel">
-            <div class="panel-header">
-                <h2>🌍 Global Spyware Vendor Network (Live API)</h2>
-                <span class="status-indicator live">● LIVE DATA: SURVEILLANCE WATCH API</span>
-            </div>
-            <div id="vendor-map" class="map-container"></div>
-            <div class="map-legend">
-                <span class="legend-item"><span class="dot target"></span> Target (Uganda)</span>
-                <span class="legend-item"><span class="dot vendor"></span> Vendor HQ</span>
-            </div>
-        </section>
+    <main class="container main-layout">
 
-        <div class="grid-2-col">
-            <!-- Panel 2: Spyware Encyclopedia -->
-            <section class="panel encyclopedia-panel">
-                <div class="panel-header">
-                    <h2>🛡️ Spyware & Surveillance Encyclopedia</h2>
-                    <span class="status-indicator">CURATED KNOWLEDGE BASE</span>
+        <!-- Left Column: Map & Data -->
+        <div class="primary-column">
+
+            <section class="card map-section">
+                <div class="card-header">
+                    <h2 title="Live geographical plotting of spyware vendor headquarters and targeted regions">
+                        Global Surveillance Supply Chain Map ⓘ</h2>
+                    <span class="status-badge live-pulse">● Live API: SurveillanceWatch.io</span>
                 </div>
-                <div class="scrollable-content" id="spyware-list">
-                    <!-- Loaded via JS -->
-                    <div class="loading">Loading encyclopedia...</div>
+                <div class="card-body p-0">
+                    <div id="vendor-map" class="map-container"></div>
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item"><span class="dot target"></span> Targeted Country (Uganda)</div>
+                    <div class="legend-item"><span class="dot vendor"></span> Vendor Headquarters</div>
+                    <div class="legend-item"><span class="line connection"></span> Verified Supply Connection</div>
                 </div>
             </section>
 
-            <!-- Panel 3: Survey Findings -->
-            <section class="panel survey-panel">
-                <div class="panel-header">
-                    <h2>📊 Quantitative Privacy Findings (N=320)</h2>
-                    <span class="status-indicator">CHAPTER 4 DATA</span>
+            <section class="card framework-section">
+                <div class="card-header">
+                    <h2>Socio-Technical Mitigation Framework</h2>
                 </div>
-                <div class="charts-container">
-                    <div class="chart-wrapper">
-                        <canvas id="privacyConcernChart"></canvas>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="adaptationChart"></canvas>
+                <div class="card-body">
+                    <h3 style="margin-bottom: 1rem; text-align: center; font-size: 1.1rem; color: #1e293b;">Visual
+                        Architecture</h3>
+                    <img src="sfmsedsr-uganda-architecture.png" alt="Visual Architecture of the Mitigation Framework"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto 2rem auto;">
+
+                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem; color: #1e293b;">Framework Mitigation Matrix</h3>
+                    <div style="overflow-x: auto;">
+                        <table
+                            style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; background: white;">
+                            <thead>
+                                <tr style="background: #f8fafc; border-bottom: 2px solid #cbd5e1;">
+                                    <th style="padding: 12px; border: 1px solid #e2e8f0; color: #334155; width: 25%;">
+                                        Framework Layer</th>
+                                    <th style="padding: 12px; border: 1px solid #e2e8f0; color: #334155; width: 37.5%;">
+                                        Proactive Controls (Prevention)</th>
+                                    <th style="padding: 12px; border: 1px solid #e2e8f0; color: #334155; width: 37.5%;">
+                                        Reactive Controls (Response)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <strong>1. User Empowerment</strong>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Point-of-Sale Onboarding:</strong> Mandating device retailers
+                                                provide baseline digital hygiene literacy.</li>
+                                            <li><strong>Public & High-Risk Training:</strong> Specialized training for
+                                                the general public and high-risk targets on spyware and surveillance
+                                                risk and how to protect themselves.</li>
+                                        </ul>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Clear Reporting Mechanisms:</strong> A structured interaction
+                                                flow (Suspicion → Isolation → Trusted Helpline → Professional Forensics)
+                                                linking users to experts for safe triage and TFGBV support.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <strong>2. Organizational Governance</strong>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>High-Target Auditing:</strong> Strict Zero-Trust MDM preventing
+                                                corporate/personal data mixing.</li>
+                                            <li><strong>Awareness Decentralization:</strong> Expanding mandates beyond
+                                                corporate silos to the informal economy.</li>
+                                        </ul>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Spyware Playbooks:</strong> Formal incident response protocols
+                                                for nation-state infections.</li>
+                                            <li><strong>Digital Lender Accountability:</strong> Strict audits for
+                                                platforms unauthorizedly scraping SMS/notifications.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <strong>3. Technical Infrastructure</strong>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>State-Provisioned Tooling:</strong> Government procurement of
+                                                detection tools distributed via public services.</li>
+                                            <li><strong>Import Checks:</strong> Requirements for pre-installed
+                                                anti-surveillance baselines on imported devices.</li>
+                                        </ul>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Hardware & Payload Defense:</strong> Adoption of hardware kill
+                                                switches and decentralized E2EE.</li>
+                                            <li><strong>Telecom Safeguards:</strong> Strict barriers implemented by ISPs
+                                                against SIM-swaps and SS7 vulnerabilities.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <strong>4. Legal & Policy Environment</strong>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Capacity Building:</strong> Aggressively staffing the Data
+                                                Protection Office to handle abuses.</li>
+                                            <li><strong>International Partnerships:</strong> Alignment with
+                                                international bodies to combat mercenary supply chains.</li>
+                                        </ul>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>First-Contact IT Forensics:</strong> Deploying well-equipped IT
+                                                forensic teams to local police stations.</li>
+                                            <li><strong>Judicial Warrants:</strong> Amending RICA 2010 to mandate strict
+                                                judicial oversight and severe DPPA penalties.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <strong>5. Civil Society & Public Awareness</strong>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Grassroots Threat Network:</strong> Campaigns partnering with
+                                                religious/market groups to push awareness.</li>
+                                            <li><strong>National Early-Warning:</strong> Real-time threat intelligence
+                                                sharing network among NGOs.</li>
+                                        </ul>
+                                    </td>
+                                    <td style="padding: 12px; border: 1px solid #e2e8f0; vertical-align: top;">
+                                        <ul style="margin:0; padding-left:1.2rem;">
+                                            <li><strong>Independent Forensics Lab:</strong> A bilingual rapid-response
+                                                clinic to extract payloads and verify infections.</li>
+                                            <li><strong>Attribution Campaigns:</strong> Shifting civil society focus to
+                                                actively "naming and shaming" spyware operators.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
+
+
+
         </div>
 
-        <!-- Panel 4: Incident Timeline -->
-        <section class="panel timeline-panel">
-            <div class="panel-header">
-                <h2>📅 Uganda Surveillance Incident Timeline (2011–2025)</h2>
-            </div>
-            <div class="timeline-container" id="incident-timeline">
-                <!-- Loaded via JS -->
-                <div class="loading">Loading timeline...</div>
-            </div>
-        </section>
+        <!-- Right Column: Lists -->
+        <div class="secondary-column">
+
+            <section class="card list-section">
+                <div class="card-header">
+                    <h2>Commercial Spyware Database</h2>
+                    <span class="status-badge live-pulse">● Live API</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="scroll-list" id="spyware-list">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card list-section">
+                <div class="card-header">
+                    <h2>Historical Spyware Index</h2>
+                    <span class="status-badge live-pulse">● Live API: Wikipedia</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="scroll-list" id="wiki-list">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card list-section">
+                <div class="card-header">
+                    <h2 title="MITRE ATT&CK® STIX Database dynamically filtered for Stalkerware and Spyware TTPs">MITRE
+                        ATT&CK® Techniques ⓘ</h2>
+                    <span class="status-badge live-pulse">● Live API</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="scroll-list" id="mitre-list">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card survey-section">
+                <div class="card-header">
+                    <h2>Quantitative Privacy Findings (N=320)</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="privacyConcernChart"></canvas>
+                    </div>
+                    <div class="chart-footer">Survey Methodology: Purposive sampling (April-May 2026), n=320 valid
+                        responses. Error margin ±5%.</div>
+                </div>
+            </section>
+
+            <section class="card survey-section">
+                <div class="card-header">
+                    <h2>Behavioral Adaptations</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="adaptationChart"></canvas>
+                    </div>
+                    <div class="chart-footer">Self-reported actions following surveillance awareness. Multi-select
+                        format.</div>
+                </div>
+            </section>
+
+        </div>
 
     </main>
 
-    <footer>
-        <p>This dashboard is a supplementary empirical contribution for Master's level research. <br>
-        Data triangulated from SurveillanceWatch.io, Citizen Lab, Amnesty International, Privacy International, and primary survey findings.</p>
-        <p class="author">Research by Denis Ainedembe | Uganda Martyrs University (2026)</p>
+    <div class="container" style="margin-bottom: 2rem;">
+        <section class="card timeline-section">
+            <div class="card-header">
+                <h2>Reported Uganda Surveillance Incidents (2011–2025)</h2>
+            </div>
+            <div class="card-body p-0">
+                <div class="timeline" id="incident-timeline">
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>A supplementary research artefact for: <em>"A Framework for Mitigating Spyware-Enabled Surveillance Risks
+                    in Uganda"</em> — Ainedembe Denis, Uganda Martyrs University, MIS, 2026.</p>
+            <p>Data triangulated from SurveillanceWatch.io, MITRE ATT&CK® CTI, Wikipedia REST API, and primary
+                dissertation survey data (N=320).</p>
+        </div>
     </footer>
+
+    <!-- Methodology Modal -->
+    <div id="methodologyModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About This Artefact</h2>
+                <button class="close-btn"
+                    onclick="document.getElementById('methodologyModal').classList.remove('active')">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">
+                    A supplementary research artefact for the dissertation:
+                    <em><strong>"A Framework for Mitigating Spyware-Enabled Surveillance Risks in Uganda"</strong></em>
+                    — Ainedembe Denis, Uganda Martyrs University, Masters in Information Systems, 2026.
+                </p>
+
+                <h3 style="font-size:1rem; font-weight:600; color:#1e3a8a; margin-bottom:0.75rem;">Data Triangulation
+                </h3>
+                <p style="font-size:0.9rem; color:#475569; margin-bottom:1rem;">The artefact operationalises Chapter 4
+                    findings by triangulating four independent data sources:</p>
+                <ul class="modal-list">
+                    <li><strong>SurveillanceWatch.io API</strong> — Real-time commercial spyware vendor database with
+                        verified country-targeting data.</li>
+                    <li><strong>MITRE ATT&amp;CK® STIX</strong> — Official behavioural threat intelligence (TTPs) for
+                        spyware and stalkerware techniques.</li>
+                    <li><strong>Wikipedia REST API</strong> — Established historical index of documented spyware
+                        programs.</li>
+                    <li><strong>Primary Survey Data (N=320)</strong> — Quantitative findings on Ugandan user
+                        perceptions, behavioral adaptations, and surveillance experiences.</li>
+                </ul>
+
+                <h3 style="font-size:1rem; font-weight:600; color:#1e3a8a; margin:1.25rem 0 0.75rem;">The
+                    SFMSEDSR-Uganda Framework</h3>
+                <p style="font-size:0.9rem; color:#475569; margin-bottom:1rem;">
+                    Grounded in Socio-Technical Systems Theory (Trist &amp; Bamforth, 1951), Contextual Integrity
+                    (Nissenbaum, 2004),
+                    and Privacy by Design (Cavoukian, 2009), the validated framework below was assessed by 8 domain
+                    experts
+                    (ICT security, legal, civil society, academia) using a modified Delphi method. It achieved an
+                    overall
+                    expert validation score of <strong>4.41 / 5.0</strong>.
+                </p>
+
+                <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left;">
+                        <thead>
+                            <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
+                                <th style="padding:10px 12px; color:#334155;">Framework Layer</th>
+                                <th style="padding:10px 12px; color:#334155; text-align:center;">Relevance</th>
+                                <th style="padding:10px 12px; color:#334155; text-align:center;">Feasibility</th>
+                                <th style="padding:10px 12px; color:#334155; text-align:center;">Mean Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid #f1f5f9;">
+                                <td style="padding:9px 12px;">1. User Empowerment</td>
+                                <td style="padding:9px 12px; text-align:center;">4.8</td>
+                                <td style="padding:9px 12px; text-align:center;">4.2</td>
+                                <td style="padding:9px 12px; text-align:center; font-weight:600;">4.53</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid #f1f5f9; background:#fafbfc;">
+                                <td style="padding:9px 12px;">2. Organisational Governance</td>
+                                <td style="padding:9px 12px; text-align:center;">4.7</td>
+                                <td style="padding:9px 12px; text-align:center;">3.9</td>
+                                <td style="padding:9px 12px; text-align:center; font-weight:600;">4.38</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid #f1f5f9;">
+                                <td style="padding:9px 12px;">3. Technical Infrastructure</td>
+                                <td style="padding:9px 12px; text-align:center;">4.9</td>
+                                <td style="padding:9px 12px; text-align:center;">4.0</td>
+                                <td style="padding:9px 12px; text-align:center; font-weight:600; color:#1e3a8a;">4.55 ★
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid #f1f5f9; background:#fafbfc;">
+                                <td style="padding:9px 12px;">4. Legal &amp; Policy Environment</td>
+                                <td style="padding:9px 12px; text-align:center;">4.6</td>
+                                <td style="padding:9px 12px; text-align:center;">3.7</td>
+                                <td style="padding:9px 12px; text-align:center; font-weight:600;">4.25</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px;">5. Civil Society &amp; Awareness</td>
+                                <td style="padding:9px 12px; text-align:center;">4.5</td>
+                                <td style="padding:9px 12px; text-align:center;">4.1</td>
+                                <td style="padding:9px 12px; text-align:center; font-weight:600;">4.33</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="border-top:2px solid #e2e8f0; background:#f8fafc;">
+                                <td style="padding:10px 12px; font-weight:700; color:#0f172a;">Overall Framework</td>
+                                <td style="padding:10px 12px; text-align:center; font-weight:700;">4.70</td>
+                                <td style="padding:10px 12px; text-align:center; font-weight:700;">3.98</td>
+                                <td style="padding:10px 12px; text-align:center; font-weight:700; color:#1e3a8a;">4.41 /
+                                    5.0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <p style="font-size:0.75rem; color:#94a3b8; margin-top:0.5rem;">Source: Primary Data, 2026. Expert
+                        Validation via Modified Delphi Method (N=8).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Entity Detail Modal -->
+    <div id="entityModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Entity Name</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-uganda-alert" id="modalAlert"></div>
+
+                <h3>Description</h3>
+                <div id="modalDesc" class="modal-text"></div>
+
+                <div class="modal-grid">
+                    <div id="modalTargetsSection">
+                        <h3>Known Targeting</h3>
+                        <ul id="modalTargets" class="modal-list"></ul>
+                    </div>
+                    <div id="modalFundersSection">
+                        <h3>Funders / Investors</h3>
+                        <ul id="modalFunders" class="modal-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
