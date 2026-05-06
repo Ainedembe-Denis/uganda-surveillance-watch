@@ -1,0 +1,26 @@
+{
+    "privacy_concern": {
+        "title": "Level of Concern Regarding Digital Privacy",
+        "labels": ["Very Concerned", "Somewhat Concerned", "Neutral", "Not Concerned"],
+        "data": [68.1, 22.5, 6.4, 3.0],
+        "type": "doughnut"
+    },
+    "surveillance_suspicion": {
+        "title": "Suspicion of Being Monitored",
+        "labels": ["Strongly Suspect", "Somewhat Suspect", "Unsure", "Do Not Suspect"],
+        "data": [35.2, 23.9, 28.5, 12.4],
+        "type": "bar"
+    },
+    "trust_levels": {
+        "title": "Mean Trust in Entities to Protect Data (1-5 Scale)",
+        "labels": ["Telecoms", "Government", "Tech Companies", "Employers"],
+        "data": [2.69, 2.15, 3.12, 3.45],
+        "type": "bar"
+    },
+    "behavioral_adaptation": {
+        "title": "Actions Taken Due to Privacy Concerns",
+        "labels": ["Use VPNs", "Use Encrypted Messaging (Signal/WhatsApp)", "Self-Censorship Online", "Cover Webcams", "Avoid Certain Websites"],
+        "data": [45.6, 88.2, 52.3, 31.0, 41.5],
+        "type": "horizontalBar"
+    }
+}

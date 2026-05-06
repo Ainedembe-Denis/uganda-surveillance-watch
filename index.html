@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uganda Digital Surveillance Watch | Research Intelligence Dashboard</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Chart.js for Survey Data -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <header>
+        <div class="header-container">
+            <div class="badge">RESEARCH ARTEFACT</div>
+            <h1>Uganda Digital Surveillance Watch</h1>
+            <p class="subtitle">An intelligence dashboard tracking spyware, surveillance technologies, and privacy impacts in East Africa. Developed for Chapter 4 of: "A Framework for Mitigating Spyware-Enabled Surveillance Risks in Uganda" by Denis Ainedembe.</p>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- Panel 1: World Vendor Map -->
+        <section class="panel map-panel">
+            <div class="panel-header">
+                <h2>🌍 Global Spyware Vendor Network (Live API)</h2>
+                <span class="status-indicator live">● LIVE DATA: SURVEILLANCE WATCH API</span>
+            </div>
+            <div id="vendor-map" class="map-container"></div>
+            <div class="map-legend">
+                <span class="legend-item"><span class="dot target"></span> Target (Uganda)</span>
+                <span class="legend-item"><span class="dot vendor"></span> Vendor HQ</span>
+            </div>
+        </section>
+
+        <div class="grid-2-col">
+            <!-- Panel 2: Spyware Encyclopedia -->
+            <section class="panel encyclopedia-panel">
+                <div class="panel-header">
+                    <h2>🛡️ Spyware & Surveillance Encyclopedia</h2>
+                    <span class="status-indicator">CURATED KNOWLEDGE BASE</span>
+                </div>
+                <div class="scrollable-content" id="spyware-list">
+                    <!-- Loaded via JS -->
+                    <div class="loading">Loading encyclopedia...</div>
+                </div>
+            </section>
+
+            <!-- Panel 3: Survey Findings -->
+            <section class="panel survey-panel">
+                <div class="panel-header">
+                    <h2>📊 Quantitative Privacy Findings (N=320)</h2>
+                    <span class="status-indicator">CHAPTER 4 DATA</span>
+                </div>
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <canvas id="privacyConcernChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="adaptationChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Panel 4: Incident Timeline -->
+        <section class="panel timeline-panel">
+            <div class="panel-header">
+                <h2>📅 Uganda Surveillance Incident Timeline (2011–2025)</h2>
+            </div>
+            <div class="timeline-container" id="incident-timeline">
+                <!-- Loaded via JS -->
+                <div class="loading">Loading timeline...</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>This dashboard is a supplementary empirical contribution for Master's level research. <br>
+        Data triangulated from SurveillanceWatch.io, Citizen Lab, Amnesty International, Privacy International, and primary survey findings.</p>
+        <p class="author">Research by Denis Ainedembe | Uganda Martyrs University (2026)</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

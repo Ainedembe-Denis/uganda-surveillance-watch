@@ -1,0 +1,68 @@
+[
+    {
+        "id": "pegasus",
+        "name": "Pegasus",
+        "developer": "NSO Group",
+        "hq": "Israel",
+        "type": "Zero-click mercenary spyware",
+        "url": "https://www.nsogroup.com",
+        "uganda_context": "Reported targeting of Ugandan journalists and officials (e.g., Canary Mugume in 2024). Discovered on devices of Ugandan activists.",
+        "details": "Highly sophisticated surveillance tool capable of infiltrating smartphones (iOS/Android) without user interaction. Extracts messages, emails, media, and records calls.",
+        "sources": ["Citizen Lab", "Amnesty International", "Apple Threat Notifications"]
+    },
+    {
+        "id": "finfisher",
+        "name": "FinFisher / FinSpy",
+        "developer": "Gamma Group",
+        "hq": "United Kingdom / Germany",
+        "type": "Law enforcement spyware",
+        "url": "Defunct",
+        "uganda_context": "Found to be used by Ugandan security agencies (CMI) under 'Operation Gladiator' between 2011-2013 to monitor opposition figures and journalists.",
+        "details": "Commercial intrusion malware sold to governments. It can capture webcam video, Skype audio, passwords, and microphones.",
+        "sources": ["Privacy International (2015 report)"]
+    },
+    {
+        "id": "predator",
+        "name": "Predator",
+        "developer": "Intellexa / Cytrox",
+        "hq": "Greece / North Macedonia",
+        "type": "1-click mercenary spyware",
+        "url": "https://intellexa.com",
+        "uganda_context": "Intellexa alliance tools have been documented targeting civil society in East Africa, presenting a regional threat.",
+        "details": "Mobile spyware that typically requires the user to click a malicious link. Operates similarly to Pegasus, granting full access to device data.",
+        "sources": ["Citizen Lab", "Meta Threat Intelligence"]
+    },
+    {
+        "id": "ufed",
+        "name": "UFED",
+        "developer": "Cellebrite",
+        "hq": "Israel",
+        "type": "Physical forensic extraction",
+        "url": "https://cellebrite.com",
+        "uganda_context": "Used by Ugandan police to extract data from seized devices of activists and opposition members (e.g., during 2021 elections and 2025/2026 arrests).",
+        "details": "Requires physical access to the device. Bypasses lock screens and extracts all data, including encrypted messages and deleted files.",
+        "sources": ["Citizen Lab", "Unwanted Witness"]
+    },
+    {
+        "id": "safecity",
+        "name": "Safe City CCTV",
+        "developer": "Huawei",
+        "hq": "China",
+        "type": "Mass surveillance / Facial Recognition",
+        "url": "https://e.huawei.com",
+        "uganda_context": "Deployed across Kampala and major highways since 2019 under a $126M project. Linked to tracking opposition figures.",
+        "details": "Network of high-definition cameras integrated with artificial intelligence and facial recognition capabilities, feeding into a centralized police command center.",
+        "sources": ["Business & Human Rights Resource Centre", "Wall Street Journal"]
+    },
+    {
+        "id": "thetruthspy",
+        "name": "TheTruthSpy",
+        "developer": "1Byte",
+        "hq": "Vietnam",
+        "type": "Commercial Stalkerware",
+        "url": "https://thetruthspy.com",
+        "uganda_context": "Consumer-grade spyware widely available and used in domestic contexts in Uganda, posing severe privacy risks to ordinary citizens.",
+        "details": "Discreetly uploads call logs, text messages, photos, browsing history, and real-time location data to a remote server.",
+        "sources": ["TechCrunch investigation"]
+    }
+]

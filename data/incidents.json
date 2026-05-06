@@ -1,0 +1,58 @@
+[
+    {
+        "year": "2011",
+        "incident": "Operation Gladiator",
+        "description": "Ugandan intelligence allegedly procured FinFisher spyware from Gamma Group to monitor political opposition following the 'Walk to Work' protests.",
+        "tool": "FinFisher",
+        "actor": "State Intelligence",
+        "source": "Privacy International"
+    },
+    {
+        "year": "2015",
+        "incident": "FinFisher Evidence",
+        "description": "Privacy International publishes detailed report 'For God and My President' detailing the deployment of FinFisher in Uganda.",
+        "tool": "FinFisher",
+        "actor": "Civil Society / Researchers",
+        "source": "Privacy International"
+    },
+    {
+        "year": "2019",
+        "incident": "Huawei Safe City",
+        "description": "Installation of hundreds of CCTV cameras with facial recognition capabilities across Kampala begins, backed by Huawei.",
+        "tool": "Mass CCTV / AI",
+        "actor": "Police / Huawei",
+        "source": "WSJ / Media"
+    },
+    {
+        "year": "2021",
+        "incident": "Election Internet Shutdown",
+        "description": "Total internet blackout during the general elections, preceded by targeted blocking of social media and VPNs.",
+        "tool": "Network Disruption",
+        "actor": "State / Telecoms",
+        "source": "Access Now"
+    },
+    {
+        "year": "2021",
+        "incident": "Pegasus Targeting (US Officials)",
+        "description": "Apple notifies US State Department employees in Uganda that their iPhones were targeted by NSO Group's Pegasus spyware.",
+        "tool": "Pegasus",
+        "actor": "Unknown State Actor",
+        "source": "Reuters"
+    },
+    {
+        "year": "2024",
+        "incident": "Canary Mugume Alert",
+        "description": "Prominent investigative journalist Canary Mugume receives an Apple threat notification warning of a state-sponsored spyware attack.",
+        "tool": "State-sponsored spyware (likely Pegasus)",
+        "actor": "State Actor",
+        "source": "Defenders Protection Initiative"
+    },
+    {
+        "year": "2025",
+        "incident": "Cellebrite Extractions",
+        "description": "Reports of activists' devices being seized and forensically extracted using UFED tools during detentions.",
+        "tool": "Cellebrite UFED",
+        "actor": "Police",
+        "source": "Unwanted Witness"
+    }
+]
