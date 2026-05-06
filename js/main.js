@@ -34,8 +34,8 @@ function initMap() {
         .pointOfView({ lat: 1.3733, lng: 32.2903, altitude: 2.0 }) // Centered on Uganda
         .arcColor(() => '#38bdf8')
         .arcAltitude(null)
-        .arcAltitudeAutoScale(0.5)
-        .arcStroke(0.5)
+        .arcAltitudeAutoScale(0.15)
+        .arcStroke(0.4)
         .arcDashLength(0.4)
         .arcDashGap(0.2)
         .arcDashAnimateTime(1500)
