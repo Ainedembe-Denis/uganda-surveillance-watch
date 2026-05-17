@@ -20,32 +20,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css?v=1.2">
+    <link rel="stylesheet" href="css/styles.css?v=1.3">
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="title-block">
-                    <span class="academic-badge">EMPIRICAL RESEARCH ARTEFACT</span>
-                    <h1>Uganda Spyware & Surveillance Watch</h1>
-                    <i>"They know who you are. It's time to uncover who they are." — SurveillanceWatch</i>
-                </div>
-                <div class="meta-block">
-                    <p><strong>Researcher:</strong> Ainedembe Denis</p>
-                    <p><strong>University:</strong> Uganda Martyrs University</p>
-                    <button class="methodology-btn"
-                        onclick="document.getElementById('methodologyModal').classList.add('active')">View
-                        Methodology</button>
-                </div>
+    <!-- Compact Unified SaaS Header & Navbar -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="brand-section">
+                <span class="brand-badge">EMPIRICAL RESEARCH ARTEFACT</span>
+                <span class="brand-title">Uganda Spyware Watch</span>
             </div>
-        </div>
-    </header>
-
-    <!-- Academic Multi-Tab SaaS workspace Navbar -->
-    <div class="tabs-nav-container">
-        <div class="container">
+            
             <nav class="dashboard-tabs">
                 <button class="tab-btn active" id="btn-threats" onclick="switchTab('threats')">🛡️ Threats & Supply Map</button>
                 <button class="tab-btn" id="btn-framework" onclick="switchTab('framework')">📐 Mitigation Framework</button>
@@ -53,8 +39,13 @@
                 <button class="tab-btn" id="btn-timeline" onclick="switchTab('timeline')">📅 Uganda Timeline</button>
                 <button class="tab-btn" id="btn-forensics" onclick="switchTab('forensics')">🔍 Forensic Toolkit (MVT)</button>
             </nav>
+            
+            <div class="header-actions">
+                <span class="researcher-tag">D. Ainedembe | UMU</span>
+                <button class="compact-methodology-btn" onclick="document.getElementById('methodologyModal').classList.add('active')">Methodology ⓘ</button>
+            </div>
         </div>
-    </div>
+    </header>
 
     <main class="container" style="padding-top: 1.5rem;">
 
@@ -80,7 +71,7 @@
                     </section>
                 </div>
 
-                <!-- Right Column: Live Databases -->
+                <!-- Right Column: Live Databases (Commercial Spyware Database only) -->
                 <div class="secondary-column">
                     <section class="card list-section">
                         <div class="card-header">
@@ -95,36 +86,39 @@
                             </div>
                         </div>
                     </section>
-
-                    <section class="card list-section">
-                        <div class="card-header">
-                            <h2>Historical Spyware Index</h2>
-                            <span class="status-badge live-pulse">● Live API: Wikipedia</span>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="scroll-list" id="wiki-list">
-                                <div class="loading-state">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="card list-section">
-                        <div class="card-header">
-                            <h2 title="MITRE ATT&CK® STIX Database dynamically filtered for Stalkerware and Spyware TTPs">
-                                MITRE ATT&CK® Techniques ⓘ</h2>
-                            <span class="status-badge live-pulse">● Live API</span>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="scroll-list" id="mitre-list">
-                                <div class="loading-state">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                 </div>
+            </div>
+
+            <!-- Full-Width Bottom Row: Historical Spyware & MITRE ATT&CK Side-by-Side (col-12 containing two col-6s) -->
+            <div class="db-grid">
+                <section class="card list-section">
+                    <div class="card-header">
+                        <h2>Historical Spyware Index</h2>
+                        <span class="status-badge live-pulse">● Live API: Wikipedia</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="scroll-list" id="wiki-list">
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card list-section">
+                    <div class="card-header">
+                        <h2 title="MITRE ATT&CK® STIX Database dynamically filtered for Stalkerware and Spyware TTPs">
+                            MITRE ATT&CK® Techniques ⓘ</h2>
+                        <span class="status-badge live-pulse">● Live API</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="scroll-list" id="mitre-list">
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
 
@@ -750,7 +744,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/main.js?v=1.2"></script>
+    <script src="js/main.js?v=1.3"></script>
 </body>
 
 </html>
