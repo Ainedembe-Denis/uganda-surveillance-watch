@@ -18,9 +18,9 @@
         "type": "bar"
     },
     "behavioral_adaptation": {
-        "title": "Actions Taken Due to Privacy Concerns",
-        "labels": ["Use VPNs", "Use Encrypted Messaging (Signal/WhatsApp)", "Self-Censorship Online", "Cover Webcams", "Avoid Certain Websites"],
-        "data": [45.6, 88.2, 52.3, 31.0, 41.5],
+        "title": "Behavioral Adaptations Following Awareness",
+        "labels": ["Limit App Permissions", "Change Security Settings", "Avoid Sensitive Conversations", "Use Privacy-Preserving Tools"],
+        "data": [61.3, 57.2, 52.2, 32.2],
         "type": "horizontalBar"
     }
 }

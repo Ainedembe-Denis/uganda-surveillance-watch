@@ -3,13 +3,14 @@
 let surveillanceData = [];
 let mapInstance;
 
+let chartsInitialized = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
     fetchSurveillanceWatchAPI();
     fetchMitreAttackAPI();
     fetchWikipediaSpywareAPI();
-    loadIncidents();
-    loadSurveyCharts();
+    loadIncidentsVertical();
 });
 
 // --- Map Logic ---
@@ -391,6 +392,7 @@ async function fetchWikipediaSpywareAPI() {
 // --- Local Curated Data ---
 async function loadIncidents() {
     const container = document.getElementById('incident-timeline');
+    if (!container) return;
     try {
         const response = await fetch('data/incidents.json');
         const incidents = await response.json();
@@ -490,3 +492,64 @@ async function loadSurveyCharts() {
         console.error("Survey load error:", e);
     }
 }
+
+// --- Dynamic Tab Switching & Rendering ---
+function switchTab(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    // Deactivate all tab buttons
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    
+    // Show selected tab content
+    document.getElementById(`tab-${tabId}`).classList.add('active');
+    // Activate selected tab button
+    document.getElementById(`btn-${tabId}`).classList.add('active');
+    
+    // Perform tab-specific activations
+    if (tabId === 'threats') {
+        // Force the 3D Globe map to resize and re-center inside its column container
+        setTimeout(() => {
+            if (mapInstance) {
+                const mapContainer = document.getElementById('vendor-map');
+                const width = mapContainer.clientWidth || mapContainer.getBoundingClientRect().width;
+                const height = mapContainer.clientHeight || 550;
+                mapInstance.width(width).height(height);
+            }
+            window.dispatchEvent(new Event('resize'));
+        }, 120);
+    } else if (tabId === 'survey') {
+        // Dynamically initialize Chart.js charts to avoid 0-width hidden canvas rendering issue
+        if (!chartsInitialized) {
+            loadSurveyCharts();
+            chartsInitialized = true;
+        }
+    }
+}
+
+// --- Vertical Academic Timeline Loader ---
+async function loadIncidentsVertical() {
+    const container = document.getElementById('incident-timeline-vertical');
+    if (!container) return;
+    try {
+        const response = await fetch('data/incidents.json');
+        const incidents = await response.json();
+        container.innerHTML = '';
+        incidents.sort((a, b) => a.year - b.year).forEach(inc => {
+            const item = document.createElement('div');
+            item.className = 'timeline-item-vertical';
+            item.innerHTML = `
+                <div class="timeline-content-vertical">
+                    <span class="t-year">${inc.year}</span>
+                    <h3 class="t-title">${inc.incident}</h3>
+                    <p class="t-desc">${inc.description}</p>
+                    ${inc.link ? `<a href="${inc.link}" target="_blank" class="t-citation">Source: ${inc.source} ↗</a>` : `<span style="color:var(--text-muted);font-size:0.75rem;font-weight:600;">Source: ${inc.source}</span>`}
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    } catch (e) {
+        console.error("Timeline vertical error:", e);
+        container.innerHTML = '<div class="loading-state" style="color:red">Failed to load timeline data.</div>';
+    }
+}
+
