@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+    <rect width="100%" height="100%" fill="none"/>
+
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;display=swap');
+            
+            .fav-watch {
+                font-family: 'Space Grotesk', -apple-system, sans-serif;
+                font-size: 90px;
+                font-weight: 700;
+                fill: #DC2626; /* Alert Red */
+                letter-spacing: 4px;
+            }
+            
+            .fav-accent {
+                fill: #DC2626;
+            }
+            
+            .fav-bracket {
+                fill: none;
+                stroke: #DC2626;
+                stroke-width: 12;
+                stroke-linejoin: miter;
+            }
+        </style>
+    </defs>
+
+    <g transform="translate(256, 256)">
+        <path d="M -175,-55 L -205,-55 L -205,45 L -175,45" class="fav-bracket" />
+        
+        <polygon points="-190,-35 -160,-35 -190,-5" class="fav-accent" />
+        
+        <text x="3" y="16" text-anchor="middle" class="fav-watch">WATCH</text>
+        
+        <polygon points="190,22 160,22 190,-8" class="fav-accent" />
+        
+        <path d="M 175,-55 L 205,-55 L 205,45 L 175,45" class="fav-bracket" />
+    </g>
+</svg>
