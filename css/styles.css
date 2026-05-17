@@ -101,11 +101,15 @@ body {
 /* Classic Wide Tab Menu resting on bottom border */
 .classic-tabs {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    border-top: 2px solid var(--primary-teal);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25rem 0.5rem 0 0.5rem;
+    background: #f8fafc;
 }
 
 /* Hide scrollbar for classic tabs */

@@ -534,7 +534,7 @@ async function loadIncidentsVertical() {
         const response = await fetch('data/incidents.json');
         const incidents = await response.json();
         container.innerHTML = '';
-        incidents.sort((a, b) => a.year - b.year).forEach(inc => {
+        incidents.sort((a, b) => b.year - a.year).forEach(inc => {
             const item = document.createElement('div');
             item.className = 'timeline-item-vertical';
             item.innerHTML = `
