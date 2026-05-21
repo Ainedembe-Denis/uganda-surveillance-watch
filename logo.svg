@@ -1,62 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 200" width="100%" height="100%">
-    <rect width="100%" height="100%" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 110" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#ffffff"/>
 
-    <defs>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;display=swap');
-            
-            .text-main {
-                font-family: 'Space Grotesk', -apple-system, sans-serif;
-                font-size: 34px;
-                font-weight: 700;
-                fill: #1e3a8a; /* Deep Blue */
-                letter-spacing: 3px;
-            }
-            
-            .text-watch {
-                font-family: 'Space Grotesk', -apple-system, sans-serif;
-                font-size: 38px;
-                font-weight: 700;
-                fill: #DC2626; /* Alert Red */
-                letter-spacing: 5px;
-            }
-            
-            .accent-red {
-                fill: #DC2626;
-            }
-            
-            .line-graphic {
-                stroke: #94A3B8; /* Muted Slate Gray Line */
-                stroke-width: 3;
-                stroke-linecap: round;
-            }
-            
-            .bracket {
-                fill: none;
-                stroke: #DC2626; /* Red Brackets */
-                stroke-width: 4;
-                stroke-linejoin: miter;
-            }
-        </style>
-    </defs>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="800" font-size="16" fill="#1e3a8a">
+    <text x="20" y="45" letter-spacing="1.5">SPYWARE-ENABLED</text>
+    <text x="20" y="77" letter-spacing="4.3">SURVEILLANCE</text> </g>
 
-    <g transform="translate(40, 40)">
-        <text x="0" y="45" class="text-main">UGANDA SPYWARE &amp;</text>
-        
-        <text x="0" y="105" class="text-main">SURVEILLANCE</text>
-        
-        <line x1="330" y1="94" x2="400" y2="94" class="line-graphic" />
+  <line x1="215" y1="58" x2="250" y2="58" stroke="#94a3b8" stroke-width="2"/>
 
-        <g transform="translate(430, 45)">
-            <path d="M 20,15 L 5,15 L 5,65 L 20,65" class="bracket" />
-            
-            <polygon points="25,25 45,25 25,45" class="accent-red" />
-            
-            <text x="58" y="52" class="text-watch">WATCH</text>
-            
-            <polygon points="235,55 215,55 235,35" class="accent-red" />
-            
-            <path d="M 240,15 L 255,15 L 255,65 L 240,65" class="bracket" />
-        </g>
-    </g>
+  <g transform="translate(270, 28)">
+    <path d="M12,5 L2,5 L2,55 L12,55" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="square"/>
+    <path d="M14,16 L25,16 L14,27 Z" fill="#000000"/>
+    <text x="35" y="37" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="800" fill="#dc2626" letter-spacing="2">WATCH</text>
+    <path d="M140,39 L151,39 L151,28 Z" fill="#000000"/>
+    <path d="M154,5 L164,5 L164,55 L154,55" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="square"/>
+  </g>
 </svg>
