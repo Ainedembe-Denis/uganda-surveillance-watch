@@ -32,7 +32,7 @@
                 style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
                 <div style="display: flex; align-items: center;">
                     <img src="ss-logo-cropped.png" alt="Spyware & Surveillance Watch"
-                        style="max-height: 40px; width: auto; max-width: 100%; object-fit: contain; object-position: left center;">
+                        style="max-height: 40px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; margin-top: 0.5rem;">
                 </div>
                 <div class="case-study-badge">
 
@@ -55,6 +55,18 @@
                 </div>
             </div>
             <p class="brand-quote">"They know who you are. It's time to uncover who they are." — SurveillanceWatch</p>
+            <div style="max-width: 950px; margin: 1rem auto 2rem auto; text-align: center;">
+                <div
+                    style="width: 40px; height: 2px; background: var(--primary-teal); margin: 0 auto 1rem auto; opacity: 0.6; border-radius: 2px;">
+                </div>
+                <p style="font-size: 0.72rem; color: #64748b; line-height: 1.7; letter-spacing: 0.02em; margin: 0;">
+                    Spyware &amp; Surveillance Watch is a dynamic, continuously evolving research artifact and
+                    interactive dashboard. Currently anchored by a foundational case study on Uganda, it is expanding to
+                    expose the global surveillance ecosystem mapping technologies, targets, manufacturers, and their
+                    funding networks. This platform empowers individuals and civil society worldwide with a practical
+                    mitigation framework and actionable forensic toolkits.
+                </p>
+            </div>
 
             <nav class="classic-tabs">
                 <button class="tab-btn active" id="btn-threats" onclick="switchTab('threats')">Threats &amp; Supply
@@ -554,6 +566,26 @@
 
         <!-- ==================== TAB 3: PRIMARY SURVEY FINDINGS ==================== -->
         <div id="tab-survey" class="tab-content">
+            <!-- Empirical Key Findings (Sourced from Full Report) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(145deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary-teal); margin-bottom: 0.25rem;">71.6%</div>
+                    <div style="font-size: 0.75rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">Suspect Covert Monitoring</div>
+                </div>
+                <div style="background: linear-gradient(145deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: #ef4444; margin-bottom: 0.25rem;">2.69<span style="font-size: 1.2rem; color: #94a3b8;">/5</span></div>
+                    <div style="font-size: 0.75rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">Mean Platform Trust Score</div>
+                </div>
+                <div style="background: linear-gradient(145deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 0.25rem;">&gt;70%</div>
+                    <div style="font-size: 0.75rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">Altered Digital Behavior</div>
+                </div>
+                <div style="background: linear-gradient(145deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.25rem;">62.2%</div>
+                    <div style="font-size: 0.75rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">Lack Legal Awareness</div>
+                </div>
+            </div>
+
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                 <section class="card survey-section">
                     <div class="card-header">
@@ -590,7 +622,7 @@
                 <div class="card-body"
                     style="font-size: 0.95rem; color: #334155; line-height: 1.7; padding: 1.5rem 2rem;">
                     <div
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
                         <div>
                             <h3
                                 style="font-size: 1rem; color: var(--primary-blue); margin-bottom: 0.5rem; font-weight: 600;">
@@ -621,6 +653,16 @@
                                 This underscores the urgent need for systemic, technical, and regulatory intervention.
                             </p>
                         </div>
+                        <div>
+                            <h3
+                                style="font-size: 1rem; color: var(--primary-blue); margin-bottom: 0.5rem; font-weight: 600;">
+                                Gendered &amp; Civil Society Vulnerabilities</h3>
+                            <p style="margin-bottom: 1rem;">
+                                Surveillance risks are highly asymmetrical. Empirical data indicates that spyware deployments disproportionately target civic space, particularly affecting feminist activists, journalists, and human rights defenders.
+                            </p>
+                            <p style="margin-bottom: 1rem;">
+                                This uneven distribution creates widespread paranoia, suppresses online advocacy against technology-facilitated gender-based violence (TFGBV), and erodes essential interpersonal trust within critical activist networks.
+                            </p>
                     </div>
                 </div>
             </section>
@@ -629,10 +671,12 @@
         <!-- ==================== TAB 4: UGANDA TIMELINE ==================== -->
         <div id="tab-timeline" class="tab-content">
             <div style="max-width: 900px; margin: 0 auto;">
+                <!-- Analytical Context Removed -->
+
                 <section class="card timeline-section" style="margin-bottom: 2rem;">
                     <div class="card-header"
                         style="display: flex; justify-content: space-between; align-items: center;">
-                        <h2>Reported Uganda Surveillance Incidents (2011–2025)</h2>
+                        <h2>Some Reported Surveillance Incidents in Uganda (2011–2025)</h2>
                     </div>
                     <div class="card-body" style="padding: 2.5rem 2rem;">
                         <p
@@ -667,109 +711,109 @@
                             <h3
                                 style="font-size: 1.05rem; color: var(--primary-blue); margin-bottom: 0.5rem; font-weight: 600;">
                                 Empowering Citizens Against Mercenary Spyware</h3>
-                            <p style="font-size: 0.92rem; color: #475569; line-height: 1.55; margin-bottom: 1.25rem;">
+                            <p style="font-size: 0.85rem; color: #475569; line-height: 1.6; margin-bottom: 1rem;">
                                 In alignment with Layer 1 (User Empowerment) and Layer 3 (Technical Infrastructure) of
                                 the mitigation framework, this hub provides high-risk cohorts, including journalists,
                                 human rights defenders, legal advocates, and civil society actors, with active,
                                 open-source auditing utilities and personal security guides.
                             </p>
-                            <hr style="border: 0; border-top: 1px solid #cbd5e1; margin-top: 1.5rem;">
+                            <hr style="border: 0; border-top: 1px solid #cbd5e1; margin-top: 1.25rem;">
                         </div>
 
                         <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                             <!-- MVT Toolkit -->
-                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); transition: border-color 0.2s;"
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); transition: border-color 0.2s;"
                                 onmouseover="this.style.borderColor='var(--primary-teal)'"
                                 onmouseout="this.style.borderColor='#cbd5e1'">
                                 <div>
                                     <div
-                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                                        <h4 style="font-size: 1.15rem; color: #0f172a; font-weight: 600; margin:0;">
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin:0;">
                                             Mobile Verification Toolkit (MVT)</h4>
                                         <span class="status-badge"
-                                            style="background:#fee2e2; color:#b91c1c; font-size:0.7rem; font-weight:700;">Amnesty
+                                            style="background:#fee2e2; color:#b91c1c; font-size:0.65rem; font-weight:700;">Amnesty
                                             International</span>
                                     </div>
                                     <p
-                                        style="font-size: 0.92rem; color: #475569; line-height: 1.65; margin-bottom: 1.25rem;">
+                                        style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
                                         Developed by Amnesty International's Security Lab, MVT is an open-source
                                         command-line tool designed to facilitate the consensual forensic acquisition and
                                         analysis of Android and iOS devices, detecting trace signatures left by highly
                                         targeted spyware like Pegasus and Predator.
                                     </p>
                                     <ul
-                                        style="font-size: 0.85rem; color: #64748b; padding-left: 1.2rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                                        <li style="margin-bottom: 5px;">Extracts and inspects system logs and
+                                        style="font-size: 0.75rem; color: #64748b; padding-left: 1.2rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                                        <li style="margin-bottom: 4px;">Extracts and inspects system logs and
                                             application databases.</li>
-                                        <li style="margin-bottom: 5px;">Compares device indicators against known
+                                        <li style="margin-bottom: 4px;">Compares device indicators against known
                                             Indicators of Compromise (IoCs) compiled by Citizen Lab.</li>
                                         <li>Safe, read-only analysis of backups to prevent device interference.</li>
                                     </ul>
                                 </div>
-                                <div style="display: flex; gap: 0.75rem;">
+                                <div style="display: flex; gap: 0.5rem;">
                                     <a href="https://github.com/mvt-project/mvt" target="_blank" class="methodology-btn"
-                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.3rem 0; font-size:0.72rem;">MVT
+                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem;">MVT
                                         on GitHub ↗</a>
                                     <a href="https://mvt.readthedocs.io/" target="_blank" class="methodology-btn"
-                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.3rem 0; background: var(--primary-teal); color: #fff; border-color: var(--primary-teal); font-size:0.72rem;">Documentation
+                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.25rem 0; background: var(--primary-teal); color: #fff; border-color: var(--primary-teal); font-size:0.7rem;">Documentation
                                         ↗</a>
                                 </div>
                             </div>
 
                             <!-- TinyCheck -->
-                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); transition: border-color 0.2s;"
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); transition: border-color 0.2s;"
                                 onmouseover="this.style.borderColor='var(--primary-teal)'"
                                 onmouseout="this.style.borderColor='#cbd5e1'">
                                 <div>
                                     <div
-                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                                        <h4 style="font-size: 1.15rem; color: #0f172a; font-weight: 600; margin:0;">
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin:0;">
                                             TinyCheck Spyware Detector</h4>
                                         <span class="status-badge"
-                                            style="background:#ecfdf5; color:#047857; font-size:0.7rem; font-weight:700;">Network
+                                            style="background:#ecfdf5; color:#047857; font-size:0.65rem; font-weight:700;">Network
                                             Forensics</span>
                                     </div>
                                     <p
-                                        style="font-size: 0.92rem; color: #475569; line-height: 1.65; margin-bottom: 1.25rem;">
+                                        style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
                                         TinyCheck allows you to easily capture and analyze network communications from a
                                         mobile device (iOS, Android, or IoT) using a separate Raspberry Pi-configured
                                         Wi-Fi hotspot. It identifies communication with spyware command-and-control (C2)
                                         servers in a completely non-invasive way.
                                     </p>
                                     <ul
-                                        style="font-size: 0.85rem; color: #64748b; padding-left: 1.2rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                                        <li style="margin-bottom: 5px;">Zero footprint on the target device: Spyware
+                                        style="font-size: 0.75rem; color: #64748b; padding-left: 1.2rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                                        <li style="margin-bottom: 4px;">Zero footprint on the target device: Spyware
                                             cannot detect it is being monitored.</li>
-                                        <li style="margin-bottom: 5px;">Uses heuristic analysis and Snort/Zeek rules to
+                                        <li style="margin-bottom: 4px;">Uses heuristic analysis and Snort/Zeek rules to
                                             match outbound traffic with cyber espionage servers.</li>
                                         <li>Extremely useful for civil society organizations running local clinics.</li>
                                     </ul>
                                 </div>
-                                <div style="display: flex; gap: 0.75rem;">
+                                <div style="display: flex; gap: 0.5rem;">
                                     <a href="https://github.com/KasperskyLab/TinyCheck" target="_blank"
                                         class="methodology-btn"
-                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.3rem 0; font-size:0.72rem;">TinyCheck
+                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem;">TinyCheck
                                         GitHub ↗</a>
                                     <a href="https://tiny-check.com" target="_blank" class="methodology-btn"
-                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.3rem 0; background: var(--primary-teal); color: #fff; border-color: var(--primary-teal); font-size:0.72rem;">Official
+                                        style="text-align: center; display: block; margin: 0; flex: 1; text-decoration: none; padding: 0.25rem 0; background: var(--primary-teal); color: #fff; border-color: var(--primary-teal); font-size:0.7rem;">Official
                                         Site ↗</a>
                                 </div>
                             </div>
                         </div>
 
                         <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                             <!-- Citizen Lab Security Planner -->
-                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.75rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
                                 onmouseover="this.style.borderColor='var(--primary-teal)'"
                                 onmouseout="this.style.borderColor='#cbd5e1'">
                                 <div>
                                     <h4
-                                        style="font-size: 1.15rem; color: #0f172a; font-weight: 600; margin-bottom: 1rem;">
+                                        style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin-bottom: 0.75rem;">
                                         Citizen Lab Security Planner</h4>
                                     <p
-                                        style="font-size: 0.92rem; color: #475569; line-height: 1.65; margin-bottom: 1.25rem;">
+                                        style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
                                         A highly recognized, interactive digital safety planning guide developed
                                         specifically for high-risk cohorts by the University of Toronto’s Citizen Lab.
                                         It helps you build a personalized, actionable protection baseline tailored to
@@ -777,28 +821,100 @@
                                     </p>
                                 </div>
                                 <a href="https://securityplanner.org/" target="_blank" class="methodology-btn"
-                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.3rem 0; font-size:0.72rem; width:100%;">Access
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Access
                                     Security Planner ↗</a>
                             </div>
 
                             <!-- Front Line Defenders -->
-                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.75rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
                                 onmouseover="this.style.borderColor='var(--primary-teal)'"
                                 onmouseout="this.style.borderColor='#cbd5e1'">
                                 <div>
                                     <h4
-                                        style="font-size: 1.15rem; color: #0f172a; font-weight: 600; margin-bottom: 1rem;">
+                                        style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin-bottom: 0.75rem;">
                                         Front Line Defenders: Security in a Box</h4>
                                     <p
-                                        style="font-size: 0.92rem; color: #475569; line-height: 1.65; margin-bottom: 1.25rem;">
+                                        style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
                                         In collaboration with Tactical Technology Collective, Front Line Defenders
                                         provides an extensive library of localized, multi-language guidebooks on secure
                                         configurations for messaging apps, smartphones, emails, and browsing privacy.
                                     </p>
                                 </div>
                                 <a href="https://securityinabox.org/" target="_blank" class="methodology-btn"
-                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.3rem 0; font-size:0.72rem; width:100%;">Explore
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Explore
                                     Security in a Box ↗</a>
+                            </div>
+
+                            <!-- EFF SSD -->
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                                onmouseover="this.style.borderColor='var(--primary-teal)'"
+                                onmouseout="this.style.borderColor='#cbd5e1'">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin: 0; max-width: 70%;">
+                                            EFF Surveillance Self-Defense</h4>
+                                        <span class="status-badge" style="background:#e0f2fe; color:#0369a1; font-size:0.65rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius: 4px;">Knowledge Base</span>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
+                                        The Electronic Frontier Foundation's expert guide to protecting yourself from electronic surveillance. It provides essential tutorials on secure communications, threat modeling, and circumventing censorship tailored for activists.
+                                    </p>
+                                </div>
+                                <a href="https://ssd.eff.org/" target="_blank" class="methodology-btn"
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Access SSD Guide ↗</a>
+                            </div>
+
+                            <!-- Access Now -->
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                                onmouseover="this.style.borderColor='var(--primary-teal)'"
+                                onmouseout="this.style.borderColor='#cbd5e1'">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin: 0; max-width: 70%;">
+                                            Access Now Digital Security Helpline</h4>
+                                        <span class="status-badge" style="background:#fee2e2; color:#b91c1c; font-size:0.65rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius: 4px;">Incident Response</span>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
+                                        A 24/7, free-of-charge secure helpline for civil society, activists, and journalists. If you suspect your device is compromised by state-grade spyware, Access Now provides rapid-response forensic support and mitigation advice.
+                                    </p>
+                                </div>
+                                <a href="https://www.accessnow.org/help/" target="_blank" class="methodology-btn"
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Contact Helpline ↗</a>
+                            </div>
+
+                            <!-- Tails OS -->
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                                onmouseover="this.style.borderColor='var(--primary-teal)'"
+                                onmouseout="this.style.borderColor='#cbd5e1'">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin: 0; max-width: 70%;">
+                                            Tails OS (Amnesic Incognito)</h4>
+                                        <span class="status-badge" style="background:#f3e8ff; color:#7e22ce; font-size:0.65rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius: 4px;">Secure OS</span>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
+                                        A portable operating system that protects against surveillance and censorship. It forces all incoming and outgoing connections through the Tor network and leaves no trace on the host computer. Used extensively by investigative journalists.
+                                    </p>
+                                </div>
+                                <a href="https://tails.net/" target="_blank" class="methodology-btn"
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Download Tails ↗</a>
+                            </div>
+
+                            <!-- GrapheneOS -->
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.2s;"
+                                onmouseover="this.style.borderColor='var(--primary-teal)'"
+                                onmouseout="this.style.borderColor='#cbd5e1'">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                                        <h4 style="font-size: 0.95rem; color: #0f172a; font-weight: 600; margin: 0; max-width: 70%;">
+                                            GrapheneOS</h4>
+                                        <span class="status-badge" style="background:#f1f5f9; color:#334155; font-size:0.65rem; font-weight:700; padding: 0.2rem 0.5rem; border-radius: 4px;">Hardened Mobile</span>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
+                                        A privacy and security-focused mobile operating system with Android app compatibility. It mitigates entire classes of vulnerabilities, making it significantly harder for zero-click commercial spyware to successfully exploit the device.
+                                    </p>
+                                </div>
+                                <a href="https://grapheneos.org/" target="_blank" class="methodology-btn"
+                                    style="text-align: center; display: block; margin: 0; text-decoration: none; padding: 0.25rem 0; font-size:0.7rem; width:100%;">Explore GrapheneOS ↗</a>
                             </div>
                         </div>
 
