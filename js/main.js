@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Map Logic ---
 function initMap() {
     const mapContainer = document.getElementById('vendor-map');
-    
+
     // Clear out any loading states or old content
     mapContainer.innerHTML = '';
 
@@ -35,24 +35,29 @@ function initMap() {
         .pointOfView({ lat: 1.3733, lng: 32.2903, altitude: 2.0 }) // Centered on Uganda
         .arcColor(() => '#38bdf8')
         .arcAltitude(null)
-        .arcAltitudeAutoScale(0.2)
-        .arcStroke(0.4)
-        .arcDashLength(0.9)
-        .arcDashGap(0.1)
+        .arcAltitudeAutoScale(0.28) // Reduced from 0.35 so they don't fly too high above the globe
+        .arcStroke(0.7) // Thicker default stroke
+        .arcDashLength(0.6) // Longer animated dash
+        .arcDashGap(1) // Smaller gap between dashes
         .arcDashAnimateTime(2000)
         .arcsTransitionDuration(1000)
         .pointAltitude(0.01)
         .polygonStrokeColor(() => 'rgba(255, 255, 255, 0.2)')
         .polygonCapColor(() => 'rgba(0,0,0,0)')
-        .polygonSideColor(() => 'rgba(0,0,0,0)');
+        .polygonSideColor(() => 'rgba(0,0,0,0)')
+        .onPointClick(point => {
+            if (point.entityIndex !== undefined) {
+                openModal(point.entityIndex);
+            }
+        });
 
     // Cyber atmosphere glow
     mapInstance.showAtmosphere(true).atmosphereColor('#38bdf8').atmosphereAltitude(0.15);
-    
+
     // Disabled auto-rotate by default, but remains rotatable by cursor
     mapInstance.controls().autoRotate = false;
     mapInstance.controls().enableZoom = true;
-    
+
     // Load Vector Country Borders for distinct demarcations overlaid on the realistic globe
     fetch('https://unpkg.com/globe.gl/example/datasets/ne_110m_admin_0_countries.geojson')
         .then(res => res.json())
@@ -68,54 +73,102 @@ function initMap() {
     });
 }
 
-function renderMapPins(entities) {
-    const ugandaCoords = { lat: 1.3733, lng: 32.2903 };
-    
-    const arcsData = [];
-    // Anchor Uganda point
-    const pointsData = [
-        { lat: ugandaCoords.lat, lng: ugandaCoords.lng, name: '<b>Target Area: Uganda</b><br>Focus of empirical research', color: '#fbbf24', radius: 1.2 }
-    ];
+let currentCountrySelection = 'Uganda';
 
-    entities.forEach(entity => {
+function renderMapPins(entities) {
+    const arcsData = [];
+    const pointsData = [];
+    
+    // Dynamically update the legend text below the map
+    const legendEl = document.getElementById('legend-target-country');
+    if (legendEl) {
+        legendEl.innerText = currentCountrySelection;
+    }
+    
+    // Find target country coordinates if available in any entity
+    let targetCoords = null;
+    if (currentCountrySelection.toLowerCase() === 'uganda') {
+        targetCoords = { lat: 1.3733, lng: 32.2903 };
+    } else {
+        for (const e of entities) {
+            if (e.providingTo) {
+                const match = e.providingTo.find(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase());
+                if (match && match.latitude && match.longitude) {
+                    targetCoords = { lat: match.latitude, lng: match.longitude };
+                    break;
+                }
+            }
+        }
+    }
+
+    if (targetCoords) {
+        pointsData.push({
+            lat: targetCoords.lat,
+            lng: targetCoords.lng,
+            name: `<b>Targeted Country: ${currentCountrySelection}</b>`,
+            color: '#fbbf24', // Target is Gold
+            radius: 1.2
+        });
+        
+        // Smoothly rotate globe to the newly selected country
+        if (mapInstance && mapInstance.pointOfView) {
+            mapInstance.pointOfView({ lat: targetCoords.lat, lng: targetCoords.lng, altitude: 2.0 }, 1500);
+        }
+    }
+
+    entities.forEach((entity, index) => {
         if (entity.headquarters && entity.headquarters.latitude && entity.headquarters.longitude) {
             const hqLat = entity.headquarters.latitude;
             const hqLng = entity.headquarters.longitude;
-            const targetsUganda = entity.providingTo && entity.providingTo.some(c => c.name === 'Uganda');
-            
+            const targetsSelected = entity.providingTo && entity.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase());
+
             const typeStr = entity.types && entity.types.length > 0 ? entity.types.map(t => t.name).join(', ') : 'Vendor';
-            
+
             pointsData.push({
                 lat: hqLat,
                 lng: hqLng,
-                name: `<b>${entity.name}</b><br>${entity.headquarters.name}<br><i>${typeStr}</i>`,
-                color: targetsUganda ? '#ef4444' : '#1e3a8a',
-                radius: targetsUganda ? 0.6 : 0.4
+                name: `<b>${entity.name}</b> (Vendor HQ)<br>${entity.headquarters.name}<br><i>${typeStr}</i>`,
+                color: '#ef4444', // Vendor HQ is Red
+                radius: targetsSelected ? 0.7 : 0.4,
+                entityIndex: index
             });
 
-            if (targetsUganda) {
+            if (targetsSelected && targetCoords) {
                 arcsData.push({
                     startLat: hqLat,
                     startLng: hqLng,
-                    endLat: ugandaCoords.lat,
-                    endLng: ugandaCoords.lng
+                    endLat: targetCoords.lat,
+                    endLng: targetCoords.lng,
+                    color: '#38bdf8' // Verified Supply Connection is Light Blue
                 });
             }
         }
     });
 
-    mapInstance.arcsData(arcsData);
+    mapInstance.arcsData(arcsData)
+        .arcColor('color')
+        .arcDashLength(0.6)
+        .arcDashGap(1)
+        .arcDashInitialGap(() => Math.random() * 5)
+        .arcDashAnimateTime(2000)
+        .arcStroke(0.7);
+
     mapInstance.pointsData(pointsData)
         .pointColor('color')
         .pointRadius('radius')
         .pointLabel('name');
+
+    const mapLoading = document.getElementById('map-loading');
+    if (mapLoading) {
+        mapLoading.style.display = 'none';
+    }
 }
 
 // --- Live API & Encyclopedia Logic ---
 async function fetchSurveillanceWatchAPI() {
     const container = document.getElementById('spyware-list');
     container.innerHTML = '<div class="loading-state">Downloading Intelligence Feed...</div>';
-    
+
     let data;
     try {
         const localResponse = await fetch('data/surveillance_entities.json');
@@ -138,27 +191,105 @@ async function fetchSurveillanceWatchAPI() {
         }
     }
 
-    surveillanceData = data.items;
+    let allEntities = data.items;
     
-    // Custom Sorting: Prioritize Uganda, then neighbors, then rest
-    surveillanceData.sort((a, b) => {
-        const aUganda = a.providingTo && a.providingTo.some(c => c.name === 'Uganda') ? 1 : 0;
-        const bUganda = b.providingTo && b.providingTo.some(c => c.name === 'Uganda') ? 1 : 0;
-        
-        if (aUganda !== bUganda) return bUganda - aUganda; // Uganda targeting at the top
-        
-        // Secondary sort: Neighbors (Kenya, Rwanda, Tanzania)
-        const neighbors = ['Kenya', 'Rwanda', 'Tanzania'];
-        const aNeighbor = a.providingTo && a.providingTo.some(c => neighbors.includes(c.name)) ? 1 : 0;
-        const bNeighbor = b.providingTo && b.providingTo.some(c => neighbors.includes(c.name)) ? 1 : 0;
-        
-        if (aNeighbor !== bNeighbor) return bNeighbor - aNeighbor;
-        
-        return a.name.localeCompare(b.name); // Alphabetical for the rest
+    // Populate the datalist
+    const countrySet = new Set();
+    allEntities.forEach(e => {
+        if (e.providingTo) {
+            e.providingTo.forEach(c => countrySet.add(c.name));
+        }
     });
+    
+    // Always ensure Uganda is in the list
+    countrySet.add('Uganda');
+    
+    const countryListEl = document.getElementById('country-list');
+    if (countryListEl) {
+        countryListEl.innerHTML = '';
+        Array.from(countrySet).sort().forEach(country => {
+            const option = document.createElement('option');
+            option.value = country;
+            countryListEl.appendChild(option);
+        });
+    }
 
-    renderEncyclopedia(surveillanceData);
-    renderMapPins(surveillanceData);
+    const updateVisuals = () => {
+        // Apply vendor search filter
+        const vendorSearchInput = document.getElementById('vendor-search');
+        const searchTerm = vendorSearchInput ? vendorSearchInput.value.trim().toLowerCase() : '';
+
+        // Filter and sort prioritizing current country
+        surveillanceData = [...allEntities].filter(item => {
+            if (!searchTerm) return true;
+            return item.name.toLowerCase().includes(searchTerm) || 
+                   (item.headquarters && item.headquarters.name.toLowerCase().includes(searchTerm)) ||
+                   (item.types && item.types.some(t => t.name.toLowerCase().includes(searchTerm)));
+        }).sort((a, b) => {
+            const aSelected = a.providingTo && a.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase()) ? 1 : 0;
+            const bSelected = b.providingTo && b.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase()) ? 1 : 0;
+            if (aSelected !== bSelected) return bSelected - aSelected;
+            return a.name.localeCompare(b.name);
+        });
+
+        // Compute and update dynamic top-level metrics based on the active country and search filter
+        
+        // Find only the vendors that are actively targeting the current country selection
+        const activeVendors = surveillanceData.filter(item => 
+            item.providingTo && item.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase())
+        );
+
+        const vendorCount = activeVendors.length;
+        
+        let uniqueTargets = new Set();
+        let connectionsCount = 0;
+        
+        activeVendors.forEach(e => {
+            if (e.providingTo) {
+                e.providingTo.forEach(t => uniqueTargets.add(t.name));
+                connectionsCount += e.providingTo.length;
+            }
+        });
+
+        const targetCount = uniqueTargets.size;
+
+        const metricVendorsEl = document.getElementById('metric-vendors');
+        const metricTargetsEl = document.getElementById('metric-targets');
+        const metricConnectionsEl = document.getElementById('metric-connections');
+
+        if (metricVendorsEl) metricVendorsEl.innerText = vendorCount;
+        if (metricTargetsEl) metricTargetsEl.innerText = targetCount;
+        if (metricConnectionsEl) metricConnectionsEl.innerText = connectionsCount;
+
+        renderEncyclopedia(surveillanceData);
+        renderMapPins(surveillanceData);
+    };
+
+    // Add event listener for vendor search
+    const vendorSearchInput = document.getElementById('vendor-search');
+    if (vendorSearchInput) {
+        vendorSearchInput.addEventListener('input', updateVisuals);
+    }
+
+    const searchInput = document.getElementById('country-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (val && Array.from(countrySet).some(c => c.toLowerCase() === val.toLowerCase())) {
+                currentCountrySelection = Array.from(countrySet).find(c => c.toLowerCase() === val.toLowerCase());
+                updateVisuals();
+            }
+        });
+        searchInput.addEventListener('change', (e) => {
+            const val = e.target.value.trim();
+            if (val && Array.from(countrySet).some(c => c.toLowerCase() === val.toLowerCase())) {
+                currentCountrySelection = Array.from(countrySet).find(c => c.toLowerCase() === val.toLowerCase());
+                updateVisuals();
+            }
+        });
+    }
+
+    updateVisuals();
 }
 
 // Helper to clean UTF-8 encoding artifacts from API text
@@ -172,7 +303,7 @@ function sanitizeText(str) {
             .replace(/\u2019/g, "'").replace(/\u201C/g, '"')
             .replace(/\u201D/g, '"').replace(/\u2026/g, '...')
             .replace(/[\u0080-\u009F]/g, '');
-    } catch(e) { return str; }
+    } catch (e) { return str; }
 }
 
 function renderEncyclopedia(entities) {
@@ -180,25 +311,25 @@ function renderEncyclopedia(entities) {
     container.innerHTML = '';
 
     entities.forEach((item, index) => {
-        const targetsUganda = item.providingTo && item.providingTo.some(c => c.name === 'Uganda');
+        const targetsSelected = item.providingTo && item.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase());
         const hq = item.headquarters ? item.headquarters.name : 'Unknown HQ';
-        
+
         let desc = 'No description available.';
         if (item.description && item.description.root && item.description.root.children) {
-            try { desc = sanitizeText(item.description.root.children[0].children[0].text); } catch(e) {}
+            try { desc = sanitizeText(item.description.root.children[0].children[0].text); } catch (e) { }
         }
 
         const div = document.createElement('div');
         div.className = 'list-item';
         div.onclick = () => openModal(index);
-        
+
         div.innerHTML = `
             <div class="item-header">
                 <div class="item-title">${item.name}</div>
                 <div class="item-meta">${hq}</div>
             </div>
             <div class="item-desc">${desc}</div>
-            ${targetsUganda ? '<div class="alert-tag">Linked to Uganda</div>' : ''}
+            ${targetsSelected ? '<div class="alert-tag">Linked to <strong style="color: #ef4444;">' + currentCountrySelection + '</strong></div>' : ''}
         `;
         container.appendChild(div);
     });
@@ -210,29 +341,29 @@ function openModal(entityIndex) {
     if (!item) return;
 
     document.getElementById('modalTitle').innerText = item.name;
-    
+
     const typeStr = item.types && item.types.length > 0 ? item.types.map(t => t.name).join(', ') : 'Vendor';
     const hq = item.headquarters ? item.headquarters.name : 'Unknown HQ';
     document.getElementById('modalMeta').innerText = `HQ: ${hq} | Classification: ${typeStr}`;
 
-    const targetsUganda = item.providingTo && item.providingTo.some(c => c.name === 'Uganda');
+    const targetsSelected = item.providingTo && item.providingTo.some(c => c.name.toLowerCase() === currentCountrySelection.toLowerCase());
     const alertBox = document.getElementById('modalAlert');
-    if (targetsUganda) {
+    if (targetsSelected) {
         alertBox.style.display = 'block';
-        alertBox.innerHTML = `<strong>Relevant to Chapter 4:</strong> This vendor is explicitly documented as providing surveillance capabilities to Uganda.`;
+        alertBox.innerHTML = `This vendor is explicitly documented as providing surveillance capabilities to <strong style="color: #ef4444; font-weight: 700;">${currentCountrySelection}</strong>.`;
     } else {
         alertBox.style.display = 'none';
     }
 
     let desc = 'No detailed description available.';
     if (item.description && item.description.root && item.description.root.children) {
-        try { desc = item.description.root.children[0].children[0].text; } catch(e) {}
+        try { desc = item.description.root.children[0].children[0].text; } catch (e) { }
     }
     document.getElementById('modalDesc').innerText = desc;
 
     // Sanitize description
     if (item.description && item.description.root && item.description.root.children) {
-        try { desc = sanitizeText(item.description.root.children[0].children[0].text); } catch(e) {}
+        try { desc = sanitizeText(item.description.root.children[0].children[0].text); } catch (e) { }
     }
 
     // Targets list -- hide if no data
@@ -285,10 +416,10 @@ async function fetchMitreAttackAPI() {
         const response = await fetch('https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json');
         if (!response.ok) throw new Error('MITRE fetch failed');
         const data = await response.json();
-        
+
         const techniques = data.objects.filter(obj => obj.type === 'attack-pattern');
         const keywords = ['spyware', 'surveillance', 'screen capture', 'audio capture', 'location tracking', 'exfiltration', 'keylog', 'microphone'];
-        
+
         const relevant = techniques.filter(t => {
             const n = t.name.toLowerCase();
             const d = t.description ? t.description.toLowerCase() : '';
@@ -300,7 +431,7 @@ async function fetchMitreAttackAPI() {
             const id = t.external_references?.find(ref => ref.source_name === 'mitre-attack')?.external_id || '';
             const desc = t.description ? t.description.substring(0, 150) + '...' : '';
             const url = t.external_references[0].url;
-            
+
             const div = document.createElement('div');
             div.className = 'list-item';
             div.onclick = () => window.open(url, '_blank');
@@ -325,24 +456,24 @@ async function fetchWikipediaSpywareAPI() {
         const listResponse = await fetch('https://en.wikipedia.org/w/api.php?action=parse&page=List_of_spyware_programs&prop=links&format=json&origin=*');
         if (!listResponse.ok) throw new Error('Wiki fetch failed');
         const listData = await listResponse.json();
-        
+
         // Filter out meta-namespaces and generic terms discovered during browser testing
         const genericTerms = [
-            'malware', 'spyware', 'rootkit', 'adware', 'trojan', 'facebook', 'google account', 
-            'web search engine', 'domain name system', 'wayback machine', 'settlement (litigation)', 
-            'pop-up window', 'hosts file', 'international mobile subscriber identity', 'coercion', 
-            'complaint', 'divx', 'kazaa', 'magicjack', 'movieland', 'state attorney general', 
+            'malware', 'spyware', 'rootkit', 'adware', 'trojan', 'facebook', 'google account',
+            'web search engine', 'domain name system', 'wayback machine', 'settlement (litigation)',
+            'pop-up window', 'hosts file', 'international mobile subscriber identity', 'coercion',
+            'complaint', 'divx', 'kazaa', 'magicjack', 'movieland', 'state attorney general',
             'washington (state)', 'weatherbug', 'wildtangent', 'federal trade commission',
             'adguard', 'broadcom inc.', 'better business bureau', 'class action', 'electronic frontier foundation',
             'internet service provider', 'ip address', 'keylogger', 'mac address', 'phishing', 'ransomware',
             'smartphone', 'social engineering (security)', 'software bug', 'software update', 'united states department of justice'
         ];
-        
+
         let validTitles = listData.parse.links
             .filter(link => link.ns === 0 && !genericTerms.some(term => link['*'].toLowerCase() === term))
             .map(link => link['*'])
             .slice(0, 20); // API limit for titles is 50, we take 20 for safety/speed
-            
+
         if (validTitles.length === 0) {
             container.innerHTML = '<div>No records found.</div>';
             return;
@@ -352,21 +483,21 @@ async function fetchWikipediaSpywareAPI() {
         const titlesQuery = validTitles.map(encodeURIComponent).join('|');
         // Critical: Must use exintro=1 and exlimit=max to get extracts for multiple pages at once. exsentences limits the API to 1 page!
         const extractUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&exlimit=max&titles=${titlesQuery}&format=json&origin=*`;
-        
+
         const extractResponse = await fetch(extractUrl);
         const extractData = await extractResponse.json();
-        
+
         const pages = Object.values(extractData.query.pages);
-        
+
         container.innerHTML = '';
 
         // Render the list
         pages.forEach(item => {
             // Some pages might not have extracts if they are redirects or empty
             if (!item.extract || item.extract.length < 10) return;
-            
+
             const url = `https://en.wikipedia.org/wiki/${encodeURIComponent(item.title.replace(/ /g, '_'))}`;
-            
+
             const div = document.createElement('div');
             div.className = 'list-item';
             div.onclick = () => window.open(url, '_blank');
@@ -378,11 +509,11 @@ async function fetchWikipediaSpywareAPI() {
             `;
             container.appendChild(div);
         });
-        
+
         if (container.innerHTML === '') {
             container.innerHTML = '<div>No detailed records found.</div>';
         }
-        
+
     } catch (e) {
         console.error("Wiki Error:", e);
         container.innerHTML = '<div class="loading-state" style="color:red">Failed to load Wikipedia data.</div>';
@@ -397,7 +528,7 @@ async function loadIncidents() {
         const response = await fetch('data/incidents.json');
         const incidents = await response.json();
         container.innerHTML = '';
-        incidents.sort((a,b) => a.year - b.year).forEach(inc => {
+        incidents.sort((a, b) => a.year - b.year).forEach(inc => {
             const div = document.createElement('div');
             div.className = 'timeline-event';
             div.innerHTML = `
@@ -417,10 +548,10 @@ async function loadSurveyCharts() {
     try {
         const response = await fetch('data/survey.json');
         const data = await response.json();
-        
+
         // Register the DataLabels plugin
         Chart.register(ChartDataLabels);
-        
+
         Chart.defaults.font.family = "'Inter', sans-serif";
         Chart.defaults.color = '#64748b';
 
@@ -435,9 +566,9 @@ async function loadSurveyCharts() {
                     borderColor: '#ffffff'
                 }]
             },
-            options: { 
-                maintainAspectRatio: false, 
-                plugins: { 
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
                     legend: { position: 'right', labels: { boxWidth: 12 } },
                     datalabels: {
                         color: '#ffffff',
@@ -451,7 +582,7 @@ async function loadSurveyCharts() {
                             return value > 10 ? percentage : null;
                         }
                     }
-                } 
+                }
             }
         });
 
@@ -466,10 +597,10 @@ async function loadSurveyCharts() {
                     borderRadius: 4
                 }]
             },
-            options: { 
-                indexAxis: 'y', 
-                maintainAspectRatio: false, 
-                plugins: { 
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                plugins: {
                     legend: { display: false },
                     datalabels: {
                         color: '#0f766e',
@@ -479,9 +610,9 @@ async function loadSurveyCharts() {
                         formatter: (value) => value + '%'
                     }
                 },
-                scales: { 
-                    x: { grid: { display: false }, max: 100 }, 
-                    y: { grid: { display: false } } 
+                scales: {
+                    x: { grid: { display: false }, max: 100 },
+                    y: { grid: { display: false } }
                 },
                 layout: {
                     padding: { right: 40 } // Give space for the labels
@@ -499,12 +630,12 @@ function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     // Deactivate all tab buttons
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    
+
     // Show selected tab content
     document.getElementById(`tab-${tabId}`).classList.add('active');
     // Activate selected tab button
     document.getElementById(`btn-${tabId}`).classList.add('active');
-    
+
     // Perform tab-specific activations
     if (tabId === 'threats') {
         // Force the 3D Globe map to resize and re-center inside its column container
@@ -553,3 +684,24 @@ async function loadIncidentsVertical() {
     }
 }
 
+// --- Security & Anti-Inspection ---
+// Disable right-click context menu to limit easy inspection
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Disable common developer tools keyboard shortcuts while preserving standard copy/paste (Ctrl+C, Ctrl+V)
+document.addEventListener('keydown', function(e) {
+    // Block F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+    }
+    // Block Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (DevTools)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+        e.preventDefault();
+    }
+    // Block Ctrl+U (View Source)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+        e.preventDefault();
+    }
+});
